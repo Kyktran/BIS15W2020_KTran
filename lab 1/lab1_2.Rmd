@@ -27,7 +27,7 @@ One strength of R is that there are thousands of add-on packages that perform sp
 
 In this class, we will routinely use the library called the **tidyverse**. Libraries need to be installed in order to work, and whenever you update R you also need to update all of the packages that you use. In class, the tidyverse is pre-installed but at home you will need to install the package.  
 ```{r}
-#install.packages("tidyverse")
+install.packages("tidyverse")
 ```
 
 ## Call the library
