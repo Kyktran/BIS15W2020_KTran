@@ -23,12 +23,15 @@ msleep
 ```
 
 1. From which publication are these data taken from? Don't do an internet search; show the code that you would use to find out in R.
-
+```{r}
+?msleep ##National Academy of Sciences
+```
 2. Put these data into a new object `sleep`. Make sure they are organized as a data frame.  
-
-
+```{r}
+sleep<-data.frame(msleep)
+sleep
+```
 3. Show a list of the column names is this data frame.
-
 
 4. Use `glimpse()` to summarize the data in `sleep`.
 
