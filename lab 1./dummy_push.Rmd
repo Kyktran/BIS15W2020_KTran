@@ -1,6 +1,6 @@
 ---
 title: "Dummy Push"
-author: "Your Name"
+author: "Kyle Tran"
 date: "1/10/2020"
 output: html_document
 ---
