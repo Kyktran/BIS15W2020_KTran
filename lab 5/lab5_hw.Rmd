@@ -32,7 +32,7 @@ database to perform comparative analyses with birds, mammals, and reptiles.” _
 doi: 10.1890/15-0846.1 (URL: https://doi.org/10.1890/15-0846.1).
 ```{r}
 amniota <- 
-  readr::read_csv("data/amniota.csv")
+  readr::read_csv("amniota.csv")
 ```
 
 ### `amphibio` data
@@ -41,7 +41,7 @@ for amphibian ecological traits.” _Scientific Data_, *4*, 170123. doi: 10.1038
 https://doi.org/10.1038/sdata.2017.123).
 ```{r}
 amphibio <- 
-  readr::read_csv("data/amphibio.csv")
+  readr::read_csv("amphibio.csv")
 ```
 
 ## Questions  
