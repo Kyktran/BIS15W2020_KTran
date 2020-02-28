@@ -1,11 +1,12 @@
 ---
 title: "Lab 7 Homework"
-author: "Please Add Your Name Here"
+author: "Kyle Tran"
 date: "`r Sys.Date()`"
 output:
   html_document:
     theme: spacelab
     toc: no
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -29,12 +30,62 @@ UC_admit <- readr::read_csv("data/UC_admit.csv")
 ```
 
 **1. Use the function(s) of your choice to get an idea of the overall structure of the data frame, including its dimensions, column names, variable classes, etc. As part of this, determine if there are NA's and how they are treated.**  
+```{r}
+glimpse(UC_admit)
+naniar::miss_var_summary(UC_admit)
+```
 
 
 **2. The president of UC has asked you to build a shiny app that shows admissions by ethnicity across all UC campuses. Your app should allow users to explore year, campus, and admit category as interactive variables. Use shiny dashboard and try to incorporate the aesthetics you have learned in ggplot to make the app neat and clean.**
+```{r}
+ui <- dashboardPage(
+  dashboardHeader(title = "Ethnicity distributions over UC Campuses"),
+  dashboardSidebar(disable = T),
+  dashboardBody(
+  selectInput("x", "Select Statistic", choices = c("Campus", "Academic_Yr", "Category"), 
+                selected = "Campus"),
+  plotOutput("plot", width = "1000px", height = "800px")
+))
+server <- function(input, output, session) {
+  output$plot <- renderPlot({
+    ggplot(UC_admit, aes_string(x="Ethnicity",y="FilteredCountFR",fill = input$x)) + 
+      
+      geom_bar(stat = "identity", position = "dodge") + 
+      theme_light(base_size = 18)
+  })
+ session$onSessionEnded(stopApp)
+}
+
+shinyApp(ui, server)
+```
 
 
 **3. Make alternate version of your app above by tracking enrollment at a campus over all of the represented years while allowing users to interact with campus, category, and ethnicity.**
+```{r}
+ui <- dashboardPage(
+  dashboardHeader(title = "Distributions UC Davis"),
+  dashboardSidebar(disable = T),
+  dashboardBody(
+  selectInput("x", "Select Statistic", choices = c("Campus", "Ethnicity", "Category"), 
+                selected = "Campus"),
+  plotOutput("plot", width = "1000px", height = "800px")
+))
+server <- function(input, output, session) {
+  output$plot <- renderPlot({
+     UC_admit %>% 
+        group_by(Ethnicity, Academic_Yr, Campus, Category) %>% 
+        filter(Campus == "Davis", Ethnicity != "All") %>% 
+        summarise(Amount = sum(FilteredCountFR)) %>% 
+    ggplot(aes_string(x="Academic_Yr",y="Amount",fill = input$x)) + 
+      
+      geom_bar(stat = "identity", position = "dodge") + 
+      theme_light(base_size = 18)
+  })
+ session$onSessionEnded(stopApp)
+}
+
+shinyApp(ui, server)
+```
 
 
 ## Push your final code to GitHub!
