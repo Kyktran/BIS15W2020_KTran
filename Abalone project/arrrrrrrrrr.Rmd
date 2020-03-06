@@ -12,6 +12,9 @@ knitr::opts_chunk$set(echo = TRUE)
 install.packages("naniar")
 install.packages("skimr")
 ```
+ADD README and DESCRIPTION
+FINISH BY FRIDAY
+awsome readme
 ```{r}
 library(tidyverse)
 library(shiny)
@@ -23,15 +26,21 @@ AbaloneData
 ##I renamed the data to AbaloneData and moved it into a folder with this r code and stored it in a value also named AbaloneData
 ``` 
 ```{r}
-glimpse(AbaloneData)
 naniar::miss_var_summary(AbaloneData)
 ```
 make generic app that explores possible correlations between all factors and maximum growth
-      I.e. x factor by growth
+      i.e. x factor by growth
 extra: use calculus functions to calculate the optimal tradeoff between growth and some other factor like spawn rate or costs of raising
 potential presentation format
-  1. introduce abalone
-  2. why are abalone important to us(food,ecosystem,etc)
-  3. explain collected data
-  4. show analysis (apps)
-  5. conclusion
+  1. introduce abalone/why are abalone important to us(food,ecosystem,etc)
+  2. explain collected data
+  3. show analysis (apps)
+    plots/apps to show correlations with mass and through
+    correlation between sex and mass
+    plots/apps to show correlation to sex
+    show fertility(gonad score > 0)
+      (gonad score vs mass & length)
+      fertility vs sex
+      length vs mass filled by predicted sex
+      average growth -> use to compare to other factors like sex and gonad score and trough
+  4. conclusion/further projects-ecosystem,growthrates, does mass focus affect sex
