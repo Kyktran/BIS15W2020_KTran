@@ -1,0 +1,37 @@
+---
+title: "p"
+author: "me"
+date: "3/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+install.packages("naniar")
+install.packages("skimr")
+```
+```{r}
+library(tidyverse)
+library(shiny)
+library(shinydashboard)
+```
+```{r}
+AbaloneData<-readr::read_csv("AbaloneData.csv")
+AbaloneData
+##I renamed the data to AbaloneData and moved it into a folder with this r code and stored it in a value also named AbaloneData
+``` 
+```{r}
+glimpse(AbaloneData)
+naniar::miss_var_summary(AbaloneData)
+```
+make generic app that explores possible correlations between all factors and maximum growth
+      I.e. x factor by growth
+extra: use calculus functions to calculate the optimal tradeoff between growth and some other factor like spawn rate or costs of raising
+potential presentation format
+  1. introduce abalone
+  2. why are abalone important to us(food,ecosystem,etc)
+  3. explain collected data
+  4. show analysis (apps)
+  5. conclusion
