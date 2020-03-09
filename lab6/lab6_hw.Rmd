@@ -36,7 +36,8 @@ library("gapminder")
 ## Questions
 The questions below are open-ended and have many possible solutions. Your approach should, where appropriate, include numerical summaries and visuals. Be creative; assume you are building an analysis that you would ultimately present to an audience of stakeholders. Feel free to try out different `geoms` if they more clearly present your results.  
 
-**1. Use the function(s) of your choice to get an idea of the overall structure of the data frame, including its dimensions, column names, variable classes, etc. As part of this, determine how NAs are treated in the data.**  
+**1. Use the function(s) of your choice to get an idea of the overall structure of the data frame, including its dimensions, column names, variable classes, etc. As part of this, determine how NAs are treated in the data.** 
+##Note with ?gapminder nested in your code like this it doesn't actually give you output.
 ```{r}
 glimpse(gapminder)
 gapminder
@@ -46,6 +47,7 @@ naniar::miss_var_summary(gapminder)
 
 
 **2. Among the interesting variables in gapminder is life expectancy. How has global life expectancy changed between 1952 and 2007?**
+##Remember it's a good idea to always to give a data table for your plots. If you had you would notice that you've summed all the life expectancies together instead of plotting their averages. Your graph says that life expectancy has risen from almost 7000 years to over 9000 years. Always make sure your output makes sense.
 ```{r}
 gapminder %>%
   group_by(year) %>%
@@ -56,6 +58,7 @@ gapminder %>%
 
 
 **3. How do the distributions of life expectancy compare for the years 1952 and 2007? _Challenge: Can you put both distributions on a single plot?_**
+##The graph you've made is impressive looking, if a little cluttered. The questions asks for the individual years and life expectancy, not necessarily divided by country. The average you give you just two sets of values which would make for a cleare plot. You could then use something like a geom_density() function to plot these values. 
 ```{r}
 gapminder %>%
   filter(year==1952|year==2007) %>%
@@ -68,6 +71,7 @@ gapminder %>%
 
 
 **4. Your answer above doesn't tell the whole story since life expectancy varies by region. Make a summary that shows the min, mean, and max life expectancy by continent for all years represented in the data.**
+##The question asks for these values for all years, this code averages all years together.
 ```{r}
 gapminder %>%
   group_by(continent) %>%
@@ -78,6 +82,7 @@ gapminder %>%
 
 
 **5. How has life expectancy changed between 1952-2007 for each continent? Try using `geom_line()` for this, including all continents on the same  plot.**
+##Looking at the plot this code produced probably lets you know that this code isn't doing what you want. You need to group your data by year and continent and year before you try to use ggplot, in addition you might use the average life expectancy.
 ```{r}
 gapminder %>%
   ggplot(aes(x=year, y=lifeExp, group=continent, color=continent)) +
@@ -132,7 +137,7 @@ gapminder2 %>%
   geom_jitter()+
    facet_wrap(~country)
 ```
-
+##The code for 9 and 10 works, but if we really want to compare values it might be nice to plot them in the same graph using something like geom_line() so that we can compare them directly.
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 
