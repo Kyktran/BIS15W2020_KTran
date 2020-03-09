@@ -28,25 +28,45 @@ library(rentrez)
 ```{r}
 coronaSeq <- read.GenBank("MT093631.1", as.character = TRUE)
 coronaSeq
+```
+
+```{r}
 write.dna(coronaseq, file ="data/coronaseq.fasta", format = "fasta", append = FALSE, nbcol = 6, colsep = " ", colw = 10)
 corona <- read.fasta(file= "data/coronaseq.fasta")
 corona
+```
+
+```{r}
 coronaVirusSeq <- corona[[1]]
 coronaVirusSeq
 ```
+
 **2. Explore this sequence using functions we learned in class. What is the length of the genome? Create a table showing the nucleotide composition of the sequence, and calculate the GC content.**
 ```{r}
 length(coronaVirusSeq)
+```
+
+```{r}
 table(coronaVirusSeq)
+```
+
+```{r}
 GC(coronaVirusSeq)
 ```
+
 **3.Several genomes for the new strain of coronavirus have already been uploaded to GenBank. Using search terms, look for uploaded genomes SARS-CoV-2. (Hint: You're looking for things listed as genomes, which you won't find looking for a [GENE] keyowrd 'entrez_db_searchable("nuccore")' will provide you with a list of search term options.) Limit your returned hits to 10. Download your ten genomes and write them out as a .fasta file.**
 ```{r}
 entrez_db_searchable("nuccore")
 coronaSearch <- entrez_search(db="nuccore", term= "SARS-CoV-2[Organism]", retmax=10)
 coronaSearch
+```
+
+```{r}
 coronaSeqs <- entrez_fetch(db="nuccore", id=corona_search$ids, rettype="fasta")
 coronaSeqs
+```
+
+```{r}
 write(coronaSeqs, "data/corona_seqs.fasta", sep = "\n")
 coronaSequences <- read.fasta(file= "data/corona_seqs.fasta")
 coronaSequences
